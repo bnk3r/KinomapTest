@@ -1,0 +1,3 @@
+package yb.kinomaptestandroid.data.services
+
+interface KinomapService
