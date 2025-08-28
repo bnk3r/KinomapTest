@@ -20,7 +20,7 @@ fun provideRetrofit(
     okHttpClient: OkHttpClient,
     gsonFactory: GsonConverterFactory
 ): Retrofit = Retrofit.Builder()
-    .baseUrl("https://api.kinomap.dev/v4")
+    .baseUrl("https://api.kinomap.dev/v4/")
     .client(okHttpClient)
     .addConverterFactory(gsonFactory)
     .build()

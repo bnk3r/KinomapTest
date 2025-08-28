@@ -3,12 +3,13 @@ package yb.kinomaptestandroid.ui.navigation.views
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
 import yb.kinomaptestandroid.ui.badges.details.views.BadgesDetailsScreen
-import yb.kinomaptestandroid.ui.badges.list.views.BadgesListScreen
+import yb.kinomaptestandroid.ui.badges.categories.views.CategoriesScreen
 import yb.kinomaptestandroid.ui.navigation.controllers.AppNavigationCtrl
 import yb.kinomaptestandroid.ui.navigation.models.BadgesDetailsScreenNav
 import yb.kinomaptestandroid.ui.navigation.models.BadgesListScreenNav
@@ -19,6 +20,7 @@ fun AppNavigation(
     appNavCtrl: AppNavigationCtrl = koinViewModel()
 ) {
     val navCtrl = rememberNavController()
+    val badgeData = appNavCtrl.badgeData.collectAsStateWithLifecycle().value
 
     NavHost(
         navController = navCtrl,
@@ -27,9 +29,9 @@ fun AppNavigation(
     ) {
 
         composable<BadgesListScreenNav> {
-            BadgesListScreen(
+            CategoriesScreen(
                 modifier = Modifier.fillMaxSize(),
-                navToDetails = { appNavCtrl.navToBadgesDetails(navCtrl) }
+                categories = badgeData?.categories
             )
         }
 
