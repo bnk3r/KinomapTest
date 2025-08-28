@@ -6,4 +6,6 @@ import kotlinx.serialization.Serializable
 object BadgesListScreenNav
 
 @Serializable
-object BadgesDetailsScreenNav
+data class BadgesDetailsScreenNav(
+    val badgeId: Int
+)

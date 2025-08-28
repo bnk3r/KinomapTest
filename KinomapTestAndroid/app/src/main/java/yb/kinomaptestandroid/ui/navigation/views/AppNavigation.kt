@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
-import yb.kinomaptestandroid.ui.badges.details.views.BadgesDetailsScreen
 import yb.kinomaptestandroid.ui.badges.categories.views.CategoriesScreen
+import yb.kinomaptestandroid.ui.badges.details.views.BadgesDetailsScreen
 import yb.kinomaptestandroid.ui.navigation.controllers.AppNavigationCtrl
 import yb.kinomaptestandroid.ui.navigation.models.BadgesDetailsScreenNav
 import yb.kinomaptestandroid.ui.navigation.models.BadgesListScreenNav
@@ -21,6 +21,7 @@ fun AppNavigation(
 ) {
     val navCtrl = rememberNavController()
     val badgeData = appNavCtrl.badgeData.collectAsStateWithLifecycle().value
+    val badges = appNavCtrl.badges.collectAsStateWithLifecycle().value
 
     NavHost(
         navController = navCtrl,
@@ -31,15 +32,28 @@ fun AppNavigation(
         composable<BadgesListScreenNav> {
             CategoriesScreen(
                 modifier = Modifier.fillMaxSize(),
-                categories = badgeData?.categories
+                categories = badgeData?.categories,
+                onClickBadgeView = { badgeId ->
+                    appNavCtrl.navToBadgesDetails(
+                        navCtrl = navCtrl,
+                        badgeId = badgeId
+                    )
+                }
             )
         }
 
         composable<BadgesDetailsScreenNav> {
-            BadgesDetailsScreen(
-                modifier = Modifier.fillMaxSize(),
-                navToList = { appNavCtrl.navToBadgesList(navCtrl) }
-            )
+            it.arguments?.let { args ->
+                val badgeId = args.getInt("badgeId", -1)
+                if (badgeId == -1) return@let
+                if (badges == null) return@let
+                val badge = badges.find { b -> b.id == badgeId }
+                if (badge == null) return@let
+                BadgesDetailsScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    badge = badge
+                )
+            }
         }
 
     }

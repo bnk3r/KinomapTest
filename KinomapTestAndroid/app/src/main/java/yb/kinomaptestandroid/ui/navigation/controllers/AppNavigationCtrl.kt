@@ -25,23 +25,28 @@ class AppNavigationCtrl(
     private val _badgeData: MutableStateFlow<BadgeData?> = MutableStateFlow(null)
     val badgeData: StateFlow<BadgeData?> = _badgeData.asStateFlow()
 
+    private val _badges: MutableStateFlow<List<yb.kinomaptestandroid.ui.navigation.models.Badge>?> =
+        MutableStateFlow(null)
+    val badges: StateFlow<List<yb.kinomaptestandroid.ui.navigation.models.Badge>?> =
+        _badges.asStateFlow()
+
     init {
         fetchTestData()
     }
 
     fun fetchTestData() {
         viewModelScope.launch {
-            val data = kinomapService.getTechTestData()
-            _badgeData.update {
-                data.toBadgeData()
-            }
+            val data = kinomapService.getTechTestData().toBadgeData()
+            _badgeData.update { data }
+            _badges.update { data.categories.flatMap { it.badges } }
         }
     }
 
     fun navToBadgesDetails(
-        navCtrl: NavHostController
+        navCtrl: NavHostController,
+        badgeId: Int
     ) {
-        navCtrl.navigate(BadgesDetailsScreenNav)
+        navCtrl.navigate(BadgesDetailsScreenNav(badgeId = badgeId))
     }
 
     fun navToBadgesList(
