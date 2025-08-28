@@ -1,6 +1,7 @@
 package yb.kinomaptestandroid.ui.badges.categories.views
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,11 +17,15 @@ import yb.kinomaptestandroid.ui.navigation.models.Badge
 @Composable
 fun BadgeItemView(
     modifier: Modifier = Modifier,
-    badge: Badge
+    badge: Badge,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = modifier
             .border(1.dp, Color.Black)
+            .clickable(
+                onClick = onClick
+            )
             .padding(8.dp)
     ) {
         Text(badge.name)

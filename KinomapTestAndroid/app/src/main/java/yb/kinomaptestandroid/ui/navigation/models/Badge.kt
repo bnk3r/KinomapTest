@@ -1,5 +1,8 @@
 package yb.kinomaptestandroid.ui.navigation.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Badge(
     val id: Int,
     val name: String,
@@ -12,6 +15,6 @@ data class Badge(
 ) {
 
     val unlocked: Boolean
-        get() = unlockedDateEpochTime != null && unlockedPercent != null && unlockedPercent == 100
+        get() = unlockedDateEpochTime != null
 
 }

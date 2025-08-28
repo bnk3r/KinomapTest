@@ -3,7 +3,6 @@ package yb.kinomaptestandroid.ui.badges.categories.views
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,7 +13,8 @@ import yb.kinomaptestandroid.ui.navigation.models.BadgeCategory
 @Composable
 fun CategoriesScreen(
     modifier: Modifier = Modifier,
-    categories: List<BadgeCategory>?
+    categories: List<BadgeCategory>?,
+    onClickBadgeView: (id: Int) -> Unit
 ) {
     when (categories) {
         null -> {
@@ -42,7 +42,8 @@ fun CategoriesScreen(
                         item {
                             BadgeItemView(
                                 modifier = Modifier.fillMaxWidth(),
-                                badge = badge
+                                badge = badge,
+                                onClick = { onClickBadgeView(badge.id) }
                             )
                         }
                     }
