@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
 }
-
 android {
     namespace = "yb.kinomaptestandroid"
     compileSdk = 36
@@ -65,4 +64,6 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.koin.compose.navigation)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
 }
