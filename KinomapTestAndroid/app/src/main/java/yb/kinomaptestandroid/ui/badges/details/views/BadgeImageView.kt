@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Card
@@ -54,6 +55,7 @@ fun BadgeImageView(
                     when (unlockedDate) {
                         null -> {
                             Image(
+                                modifier = Modifier.size(48.dp),
                                 imageVector = Icons.Default.Lock,
                                 contentDescription = null
                             )
