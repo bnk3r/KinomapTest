@@ -46,7 +46,9 @@ class AppNavigationCtrl(
         navCtrl: NavHostController,
         badgeId: Int
     ) {
-        navCtrl.navigate(BadgesDetailsScreenNav(badgeId = badgeId))
+        navCtrl.navigate(BadgesDetailsScreenNav(badgeId = badgeId)) {
+            launchSingleTop = true
+        }
     }
 
     fun navToBadgesList(
