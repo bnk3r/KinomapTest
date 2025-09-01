@@ -30,10 +30,6 @@ class AppNavigationCtrl(
     val badges: StateFlow<List<yb.kinomaptestandroid.ui.navigation.models.Badge>?> =
         _badges.asStateFlow()
 
-    init {
-        fetchTestData()
-    }
-
     fun fetchTestData() {
         viewModelScope.launch {
             val data = kinomapService.getTechTestData().toBadgeData()

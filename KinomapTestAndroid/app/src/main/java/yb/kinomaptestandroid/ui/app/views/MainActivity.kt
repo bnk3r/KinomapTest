@@ -1,4 +1,4 @@
-package yb.kinomaptestandroid.ui.app
+package yb.kinomaptestandroid.ui.app.views
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
 
                     AppNavigation(
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.Companion.padding(innerPadding)
                     )
 
                 }
