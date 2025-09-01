@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".ui.app.App"
@@ -14,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KinomapTestAndroid">
         <activity
-            android:name=".ui.app.MainActivity"
+            android:name=".ui.app.views.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.KinomapTestAndroid">
             <intent-filter>
