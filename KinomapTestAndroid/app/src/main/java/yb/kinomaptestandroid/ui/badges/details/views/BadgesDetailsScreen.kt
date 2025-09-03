@@ -30,6 +30,7 @@ fun BadgesDetailsScreen(
         val instant = Instant.ofEpochSecond(time)
         formatter.format(instant)
     }
+    val badgeOwned = badge.unlockedPercent != null && badge.unlockedPercent == 100
 
     Column(
         modifier = modifier.padding(16.dp)
@@ -40,7 +41,8 @@ fun BadgesDetailsScreen(
                 true -> badge.unlockedImgUrl
                 false -> badge.lockedImgUrl
             },
-            unlockedDate = date
+            unlockedDate = date,
+            badgeOwned = badgeOwned
         )
         Spacer(
             modifier = Modifier.height(16.dp)
