@@ -3,7 +3,9 @@ package yb.kinomaptestandroid.ui.badges.details.views
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Card
@@ -22,6 +25,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -36,6 +40,21 @@ fun BadgeImageView(
     badgeOwned: Boolean
 ) {
     val progress = remember { Animatable(0f) }
+
+    val brushBadge = when (badgeOwned) {
+        true -> Brush.horizontalGradient(
+            listOf(
+                Color(0xfffded9d),
+                Color(0xffc45dad),
+                Color(0xff5ee7ea),
+                Color(0xfffcc700)
+            )
+        )
+
+        false -> Brush.horizontalGradient(
+            listOf(Color.Transparent, Color.Transparent)
+        )
+    }
 
     LaunchedEffect(badgeOwned) {
         if (badgeOwned) {
@@ -63,6 +82,11 @@ fun BadgeImageView(
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxSize()
+                        .border(
+                            BorderStroke(2.dp, brush = brushBadge),
+                            RoundedCornerShape(16.dp)
+                        )
+                        .padding(2.dp)
                         .padding(16.dp),
                     contentScale = ContentScale.Fit,
                     model = badgeUrl,
