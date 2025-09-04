@@ -1,7 +1,9 @@
 package yb.kinomaptestandroid.ui.badges.categories.views
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +18,16 @@ fun CategoryItemView(
     modifier: Modifier = Modifier,
     category: BadgeCategory
 ) {
-    Text(
+    Card(
         modifier = modifier
-            .border(1.dp, Color.Black)
-            .padding(8.dp),
-        textAlign = TextAlign.Center,
-        text = category.name,
-        style = MaterialTheme.typography.titleLarge
-    )
+    ) {
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            textAlign = TextAlign.Center,
+            text = category.name,
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
 }

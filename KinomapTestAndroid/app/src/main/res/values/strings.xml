@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KinomapTestAndroid</string>
+
+    <string name="category_screen_title">Hello, Everyone! 👋</string>
 </resources>
