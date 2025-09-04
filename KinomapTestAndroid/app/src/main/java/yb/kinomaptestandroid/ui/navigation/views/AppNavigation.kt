@@ -18,7 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
 import yb.kinomaptestandroid.ui.app.controllers.ConnectivityController
 import yb.kinomaptestandroid.ui.badges.categories.views.CategoriesScreen
-import yb.kinomaptestandroid.ui.badges.details.views.BadgesDetailsScreen
+import yb.kinomaptestandroid.ui.badges.details.views.BadgeDetailsScreen
 import yb.kinomaptestandroid.ui.navigation.controllers.AppNavigationCtrl
 import yb.kinomaptestandroid.ui.navigation.models.BadgesDetailsScreenNav
 import yb.kinomaptestandroid.ui.navigation.models.BadgesListScreenNav
@@ -87,7 +87,7 @@ fun AppNavigation(
                 if (badges == null) return@let
                 val badge = badges.find { b -> b.id == badgeId }
                 if (badge == null) return@let
-                BadgesDetailsScreen(
+                BadgeDetailsScreen(
                     modifier = Modifier.fillMaxSize(),
                     badge = badge
                 )
