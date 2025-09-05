@@ -5,4 +5,7 @@
     <string name="category_screen_failure_unknown">Oops, something went wrong…</string>
     <string name="category_screen_failure_retry">Retry</string>
     <string name="category_screen_initial_offline">No internet ! Try checking the network 🦖</string>
+
+    <string name="badge_details_screen_failure_unknown">Oops, something went wrong…</string>
+    <string name="badge_details_screen_initial_offline">No internet ! Try checking the network 🦖</string>
 </resources>

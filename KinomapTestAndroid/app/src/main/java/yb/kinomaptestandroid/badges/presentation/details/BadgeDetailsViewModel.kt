@@ -51,4 +51,10 @@ class BadgeDetailsViewModel(
         }
     }
 
+    fun retryFetchingBadge(badgeId: Int) {
+        viewModelScope.launch {
+            _uiState.update { BadgeDetailsUiState.Initial }
+        }
+    }
+
 }
