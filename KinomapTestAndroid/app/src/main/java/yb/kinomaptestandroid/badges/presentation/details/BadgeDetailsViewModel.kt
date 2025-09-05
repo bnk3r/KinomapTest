@@ -26,7 +26,7 @@ class BadgeDetailsViewModel(
                     .find { it.id == badgeId }
                 _uiState.update {
                     when (responseBadge) {
-                        null -> BadgeDetailsUiState.Failure("Badge not found")
+                        null -> BadgeDetailsUiState.Failure
                         else -> BadgeDetailsUiState.Success(
                             Badge(
                                 id = responseBadge.id,
@@ -46,8 +46,14 @@ class BadgeDetailsViewModel(
                     "BADGE_DETAILS",
                     "Error fetching data (message=\"${e.message ?: "_unknown_"}\""
                 )
-                _uiState.update { BadgeDetailsUiState.Failure(e.message ?: "_unknown_") }
+                _uiState.update { BadgeDetailsUiState.Failure }
             }
+        }
+    }
+
+    fun retryFetchingBadge(badgeId: Int) {
+        viewModelScope.launch {
+            _uiState.update { BadgeDetailsUiState.Initial }
         }
     }
 

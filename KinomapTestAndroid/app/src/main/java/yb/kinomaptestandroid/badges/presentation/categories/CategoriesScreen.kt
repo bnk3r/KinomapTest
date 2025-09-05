@@ -8,7 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesContent
+import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesFailure
 import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesHeader
+import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesInitialScreen
 import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesLoading
 import yb.kinomaptestandroid.ui.domain.network.InternetStatus
 
@@ -19,10 +21,9 @@ fun CategoriesScreen(
     internetStatus: InternetStatus,
     onClickBadgeView: (id: Int) -> Unit
 ) {
-
     val uiState = categoriesViewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(internetStatus, uiState) {
+    LaunchedEffect(internetStatus, uiState.value) {
         if (internetStatus == InternetStatus.ONLINE && uiState.value is CategoriesUIState.Initial) {
             categoriesViewModel.fetchCategories()
         }
@@ -30,7 +31,10 @@ fun CategoriesScreen(
 
     when (val state = uiState.value) {
         is CategoriesUIState.Initial -> {
-            // TODO
+            CategoriesInitialScreen(
+                modifier = modifier,
+                internetStatus = internetStatus
+            )
         }
 
         is CategoriesUIState.Loading -> {
@@ -55,7 +59,13 @@ fun CategoriesScreen(
         }
 
         is CategoriesUIState.Failure -> {
-            // TODO
+            CategoriesFailure(
+                modifier = modifier,
+                onClickRetry = {
+                    categoriesViewModel.retryFetchingCategories()
+                }
+            )
         }
     }
 }
+

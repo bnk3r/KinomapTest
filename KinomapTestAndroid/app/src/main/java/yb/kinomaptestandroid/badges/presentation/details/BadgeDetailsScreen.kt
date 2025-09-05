@@ -7,7 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
+import yb.kinomaptestandroid.badges.presentation.details.components.BadgeDetailsFailure
+import yb.kinomaptestandroid.badges.presentation.details.components.BadgeDetailsInitialScreen
 import yb.kinomaptestandroid.badges.presentation.details.components.BadgeDetailsLandscape
+import yb.kinomaptestandroid.badges.presentation.details.components.BadgeDetailsLoading
 import yb.kinomaptestandroid.badges.presentation.details.components.BadgeDetailsPortrait
 import yb.kinomaptestandroid.ui.domain.network.InternetStatus
 import kotlin.time.ExperimentalTime
@@ -24,7 +27,7 @@ fun BadgeDetailsScreen(
     val orientation = configuration.orientation
     val uiState = badgesDetailsViewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(internetStatus, uiState) {
+    LaunchedEffect(internetStatus, uiState.value) {
         if (internetStatus == InternetStatus.ONLINE && uiState.value is BadgeDetailsUiState.Initial) {
             badgesDetailsViewModel.fetchBadge(badgeId)
         }
@@ -32,11 +35,16 @@ fun BadgeDetailsScreen(
 
     when (val state = uiState.value) {
         is BadgeDetailsUiState.Initial -> {
-            // TODO
+            BadgeDetailsInitialScreen(
+                modifier = modifier,
+                internetStatus = internetStatus
+            )
         }
 
         is BadgeDetailsUiState.Loading -> {
-            // TODO
+            BadgeDetailsLoading(
+                modifier = modifier
+            )
         }
 
         is BadgeDetailsUiState.Success -> {
@@ -62,7 +70,13 @@ fun BadgeDetailsScreen(
         }
 
         is BadgeDetailsUiState.Failure -> {
-            // TODO
+            BadgeDetailsFailure(
+                modifier = modifier,
+                onClickRetry = {
+                    badgesDetailsViewModel.retryFetchingBadge(badgeId)
+                }
+            )
         }
     }
 }
+
