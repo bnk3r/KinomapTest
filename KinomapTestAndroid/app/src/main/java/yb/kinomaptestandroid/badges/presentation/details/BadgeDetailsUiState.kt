@@ -7,6 +7,6 @@ sealed class BadgeDetailsUiState {
     object Initial: BadgeDetailsUiState()
     object Loading: BadgeDetailsUiState()
     data class Success(val badge: Badge): BadgeDetailsUiState()
-    data class Failure(val message: String): BadgeDetailsUiState()
+    object Failure: BadgeDetailsUiState()
 
 }

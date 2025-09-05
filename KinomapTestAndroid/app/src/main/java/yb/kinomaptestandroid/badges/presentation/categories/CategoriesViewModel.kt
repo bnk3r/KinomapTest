@@ -42,8 +42,14 @@ class CategoriesViewModel(
                 _uiState.update { CategoriesUIState.Success(data) }
             } catch (e: Exception) {
                 Log.e("CATEGORIES", "Error fetching data (message=\"${e.message ?: "_unknown_"}\"")
-                _uiState.update { CategoriesUIState.Failure(e.message ?: "_unknown_") }
+                _uiState.update { CategoriesUIState.Failure }
             }
+        }
+    }
+
+    fun retryFetchingCategories() {
+        viewModelScope.launch {
+            _uiState.update { CategoriesUIState.Initial }
         }
     }
 
