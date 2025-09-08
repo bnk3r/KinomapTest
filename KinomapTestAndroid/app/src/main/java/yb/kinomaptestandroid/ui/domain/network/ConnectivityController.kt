@@ -20,7 +20,7 @@ class ConnectivityController(
     val internetStatus = isConnectedFlow.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000L),
-        initialValue = InternetStatus.OFFLINE
+        initialValue = InternetStatus.UNKNOWN
     )
 
     val isConnectedFlow: Flow<InternetStatus>
