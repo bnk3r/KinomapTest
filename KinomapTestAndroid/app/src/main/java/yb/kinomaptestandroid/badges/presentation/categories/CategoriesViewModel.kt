@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 import yb.kinomaptestandroid.badges.data.api.KinomapService
 import yb.kinomaptestandroid.badges.domain.badges.Badge
 import yb.kinomaptestandroid.badges.domain.badges.BadgeCategory
+import yb.kinomaptestandroid.badges.domain.badges.BadgeFilterType
+import yb.kinomaptestandroid.badges.domain.badges.BadgesFilters
 
 class CategoriesViewModel(
     val kinomapService: KinomapService
@@ -50,6 +52,39 @@ class CategoriesViewModel(
     fun retryFetchingCategories() {
         viewModelScope.launch {
             _uiState.update { CategoriesUIState.Initial }
+        }
+    }
+
+    fun filteredCategories(): List<BadgeCategory> {
+        return when (val state = uiState.value) {
+            is CategoriesUIState.Success -> {
+                state.data.map { category ->
+                    category.copy(
+                        badges = when (state.filters.badgeStatus) {
+                            BadgeFilterType.ALL -> category.badges
+                            BadgeFilterType.UNLOCKED -> category.badges.filter { it.isUnlocked }
+                            BadgeFilterType.LOCKED -> category.badges.filterNot { it.isUnlocked }
+                            BadgeFilterType.COMPLETE -> category.badges.filter { it.isComplete }
+                            BadgeFilterType.UNFINISHED -> category.badges.filterNot { it.isComplete }
+                        }
+                    )
+                }
+            }
+
+            else -> emptyList()
+        }
+    }
+
+    fun updateFilters(filters: BadgesFilters) {
+        if (uiState.value !is CategoriesUIState.Success) return
+        viewModelScope.launch {
+            _uiState.update {
+                it as CategoriesUIState.Success
+                CategoriesUIState.Success(
+                    data = it.data,
+                    filters = filters
+                )
+            }
         }
     }
 

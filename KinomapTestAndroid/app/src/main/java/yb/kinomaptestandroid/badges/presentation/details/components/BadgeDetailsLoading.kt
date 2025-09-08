@@ -12,7 +12,7 @@ fun BadgeDetailsLoading(
 ) {
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.Companion.Center
+        contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
     }

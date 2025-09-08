@@ -71,4 +71,5 @@ dependencies {
     implementation(libs.koin.compose.navigation)
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
+    implementation(libs.androidx.icons.extended)
 }

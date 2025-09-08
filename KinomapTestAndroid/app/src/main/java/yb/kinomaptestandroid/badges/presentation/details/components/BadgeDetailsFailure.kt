@@ -28,19 +28,19 @@ fun BadgeDetailsFailure(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.Companion.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = Modifier.Companion.size(96.dp),
+            modifier = Modifier.size(96.dp),
             imageVector = Icons.Default.Info,
             contentDescription = null,
-            colorFilter = ColorFilter.Companion.tint(MaterialTheme.colorScheme.error)
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error)
         )
-        Spacer(modifier = Modifier.Companion.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.badge_details_screen_failure_unknown),
         )
-        Spacer(modifier = Modifier.Companion.height(48.dp))
+        Spacer(modifier = Modifier.height(48.dp))
         Button(
             onClick = onClickRetry,
             colors = ButtonDefaults.buttonColors(
