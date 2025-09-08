@@ -15,6 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -22,8 +24,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import yb.kinomaptestandroid.R
 import yb.kinomaptestandroid.badges.domain.badges.BadgeCategory
 
 @Composable
@@ -86,13 +91,33 @@ fun CategoriesContent(
                             )
                         }
                     }
-                    category.badges.forEach { badge ->
-                        item {
-                            BadgeItemView(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                badge = badge,
-                                onClick = { onClickBadgeView(badge.id) })
+
+                    when {
+                        category.badges.isNotEmpty() -> {
+                            category.badges.forEach { badge ->
+                                item {
+                                    BadgeItemView(
+                                        modifier = Modifier
+                                            .fillMaxWidth(),
+                                        badge = badge,
+                                        onClick = { onClickBadgeView(badge.id) })
+                                }
+                            }
+                        }
+
+                        else -> {
+                            item(
+                                span = { GridItemSpan(gridColumns) }
+                            ) {
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    text = stringResource(R.string.category_screen_empty_category_text),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
                         }
                     }
                 }

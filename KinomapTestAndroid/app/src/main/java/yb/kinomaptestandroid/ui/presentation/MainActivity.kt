@@ -19,11 +19,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             KinomapTestAndroidTheme {
                 Scaffold(
-                    modifier = Modifier.Companion.fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
 
                     AppNavigationScreen(
-                        modifier = Modifier.Companion.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding)
                     )
 
                 }

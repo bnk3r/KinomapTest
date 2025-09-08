@@ -1,17 +1,14 @@
 package yb.kinomaptestandroid.badges.presentation.categories
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
-import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesContent
 import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesFailure
-import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesHeader
 import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesInitialScreen
 import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesLoading
+import yb.kinomaptestandroid.badges.presentation.categories.components.CategoriesSuccess
 import yb.kinomaptestandroid.ui.domain.network.InternetStatus
 
 @Composable
@@ -44,18 +41,13 @@ fun CategoriesScreen(
         }
 
         is CategoriesUIState.Success -> {
-            Column(
-                modifier = modifier
-            ) {
-                CategoriesHeader(
-                    modifier = Modifier.fillMaxWidth()
-                )
-                CategoriesContent(
-                    modifier = modifier,
-                    categories = state.data,
-                    onClickBadgeView = onClickBadgeView
-                )
-            }
+            CategoriesSuccess(
+                modifier = modifier,
+                categories = categoriesViewModel.filteredCategories(),
+                filters = state.filters,
+                onClickBadgeView = onClickBadgeView,
+                onFiltersChanged = { categoriesViewModel.updateFilters(it) }
+            )
         }
 
         is CategoriesUIState.Failure -> {

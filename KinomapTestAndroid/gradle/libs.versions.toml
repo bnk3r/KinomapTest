@@ -12,6 +12,7 @@ navigation = "2.9.3"
 retrofit = "3.0.0"
 koin = "4.1.1"
 coil = "3.3.0"
+icons = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +38,7 @@ koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", versi
 koin-compose-navigation = { group = "io.insert-koin", name = "koin-androidx-compose-navigation", version.ref = "koin" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+androidx-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "icons" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
