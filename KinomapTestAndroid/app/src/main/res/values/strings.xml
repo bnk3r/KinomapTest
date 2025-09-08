@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">KinomapTestAndroid</string>
+
+    <string name="category_screen_title">Hello, Everyone! 👋</string>
+    <string name="category_screen_failure_unknown">Oops, something went wrong…</string>
+    <string name="category_screen_failure_retry">Retry</string>
+    <string name="category_screen_initial_offline">No internet ! Try checking the network 🦖</string>
+    <string name="category_screen_empty_category_text">Empty</string>
+    <string name="category_screen_filters_title">Filters</string>
+    <string name="category_screen_filters_badge_status_title">Badge status</string>
+    <string name="category_screen_filters_badge_status_all">All</string>
+    <string name="category_screen_filters_badge_status_unlocked">Unlocked</string>
+    <string name="category_screen_filters_badge_status_locked">Locked</string>
+    <string name="category_screen_filters_badge_status_complete">Complete</string>
+    <string name="category_screen_filters_badge_status_unfinished">Unfinished</string>
+
+    <string name="badge_details_screen_failure_unknown">Oops, something went wrong…</string>
+    <string name="badge_details_screen_initial_offline">No internet ! Try checking the network 🦖</string>
+</resources>
